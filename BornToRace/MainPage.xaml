@@ -13,20 +13,23 @@
     <MasterDetailPage.Master>
         <ContentPage Padding="20" Title="Menu">
             <StackLayout>
+                
                 <ListView x:Name="MenuList" 
                   HasUnevenRows="True"
                   ItemSelected="MenuList_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout>
-                                    <Image />
-                                    <Label Text="{Binding Title}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding IconSource}"/>
+                                    <Label Text="{Binding Title}" VerticalOptions="Center"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Label Text="Born To Race" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="Title" />
+                <Label x:Name="AppVersion" HorizontalOptions="Center" FontSize="Small"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace BornToRace
@@ -13,29 +14,35 @@ namespace BornToRace
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(true)]
+
+
     public partial class MainPage : MasterDetailPage
     {
+
         public MainPage()
         {
             ShowSplashScreen();
             InitializeComponent();
             GenerateMenu();
-            
+            AppVersion.Text = AppInfo.VersionString;
         }
 
         public void GenerateMenu()
         {
             MenuList.ItemsSource = new List<MenuListItem>
             {
-                new MenuListItem { Title = "Home", Target = typeof(HomePage)},
-                new MenuListItem { Title = "Notification Center", Target = typeof(HomePage)},
-                new MenuListItem { Title = "Activities", Target = typeof(HomePage)},
-                new MenuListItem { Title = "Manager", Target = typeof(HomePage)},
-                new MenuListItem { Title = "Championship", Target = typeof(HomePage)},
-                new MenuListItem { Title = "Team", Target = typeof(HomePage)},
-                new MenuListItem { Title = "About", Target = typeof(HomePage)}
+                new MenuListItem { Title = "Home", IconSource="home.png", Target = typeof(HomePage)},
+                new MenuListItem { Title = "Notification Center", IconSource="notifications.png", Target = typeof(HomePage)},
+                new MenuListItem { Title = "Activities", IconSource="activity.png", Target = typeof(HomePage)},
+                new MenuListItem { Title = "Manager", IconSource="manager.png", Target = typeof(HomePage)},
+                new MenuListItem { Title = "Championship", IconSource="championship.png", Target = typeof(HomePage)},
+                new MenuListItem { Title = "Team", IconSource="teams.png", Target = typeof(HomePage)},
+                new MenuListItem { Title = "About", IconSource="about.png", Target = typeof(HomePage)}
             };
+            
         }
+
+
 
         async private void ShowSplashScreen()
         {

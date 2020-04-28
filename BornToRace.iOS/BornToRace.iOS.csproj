@@ -139,4 +139,25 @@
   <ItemGroup>
     <BundleResource Include="Resources\logo_black.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\notifications.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\teams.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\activity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\championship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\home.png" />
+  </ItemGroup>
 </Project>

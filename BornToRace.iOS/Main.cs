@@ -17,4 +17,5 @@ namespace BornToRace.iOS
             UIApplication.Main(args, null, "AppDelegate");
         }
     }
+
 }
