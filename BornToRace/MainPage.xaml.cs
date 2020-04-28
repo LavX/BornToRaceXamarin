@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BornToRace.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace BornToRace
         public MainPage()
         {
             InitializeComponent();
+            ShowSplashScreen();
+        }
+
+        async private void ShowSplashScreen()
+        {
+            await Navigation.PushAsync(new SplashScreen());
         }
     }
 }

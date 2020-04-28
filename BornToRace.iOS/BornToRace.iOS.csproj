@@ -133,4 +133,10 @@
       <Name>BornToRace</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\lavxlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logo_black.jpg" />
+  </ItemGroup>
 </Project>

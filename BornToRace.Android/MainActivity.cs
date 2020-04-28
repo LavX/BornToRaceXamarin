@@ -18,6 +18,8 @@ namespace BornToRace.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            this.Window.AddFlags(WindowManagerFlags.Fullscreen);
+            this.Window.AddFlags(WindowManagerFlags.KeepScreenOn);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
