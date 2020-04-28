@@ -16,14 +16,18 @@ namespace BornToRace.Views
         public SplashScreen()
         {
             InitializeComponent();
-            KillSplash();
+            Splash();
             
         }
 
-        async private void KillSplash()
+        async private void Splash()
         {
+            await PageLayout.FadeTo(0, 10);
+            await PageLayout.FadeTo(1, 3000);
             await Task.Delay(4000);
-            await Navigation.PopAsync();
+            await PageLayout.FadeTo(0, 1000);
+            await Task.Delay(1000);
+            await Navigation.PopModalAsync();
         }
     }
 }
