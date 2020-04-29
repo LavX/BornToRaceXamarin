@@ -1,9 +1,12 @@
 ﻿using BornToRace.Models;
 using BornToRace.Views;
+using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -18,13 +21,90 @@ namespace BornToRace
 
     public partial class MainPage : MasterDetailPage
     {
+        /*debug
+        string Money = "Money: $ 144 001.31";
+        string Energy = "Energy: 100/100";
+        string Date = "01/05/2020";
+        */
+        private ObservableCollection<Player> _player;
+        private SQLiteAsyncConnection _connection;
 
         public MainPage()
         {
             ShowSplashScreen();
             InitializeComponent();
+            _connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+        }
+
+        protected override async void OnAppearing()
+        {
+            await _connection.CreateTableAsync<Player>();
+            var player = await _connection.Table<Player>().ToListAsync();
+            _player = new ObservableCollection<Player>(player);
+            base.OnAppearing();
             GenerateMenu();
+            //ToolbarDate.Text = "02/12/2000";
+            //ToolbarEnergy.Text = 
             AppVersion.Text = AppInfo.VersionString;
+
+        }
+
+        public class Player : INotifyPropertyChanged
+        {
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            [PrimaryKey, AutoIncrement]
+            public int Id { get; set; }
+
+            private string _name;
+            [MaxLength(255)]
+            public string Name
+            {
+                get { return _name; }
+                set
+                {
+                    if (_name == value)
+                        return;
+                    _name = value;
+
+                    OnPropertyChanged();
+                }
+            }
+
+
+            private double _money;
+            public double Money
+            {
+                get { return _money; }
+                set
+                {
+                    if (_money == value)
+                        return;
+                    _money = value;
+
+                    OnPropertyChanged();
+                }
+            }
+
+            private int _energy;
+            public int Energy
+            {
+                get { return _energy; }
+                set
+                {
+                    if (_energy == value)
+                        return;
+                    _energy = value;
+
+                    OnPropertyChanged();
+                }
+            }
+
+            private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
         }
 
         public void GenerateMenu()
@@ -51,7 +131,7 @@ namespace BornToRace
 
         private void MenuList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var menuListItem = e.SelectedItem as MenuListItem;
+            MenuListItem menuListItem = e.SelectedItem as MenuListItem;
             if (menuListItem != null)
             {
                 Detail = new NavigationPage((Page)Activator.CreateInstance(menuListItem.Target));
