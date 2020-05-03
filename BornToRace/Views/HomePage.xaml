@@ -7,9 +7,13 @@
              x:Class="BornToRace.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label x:Name="PlayerNameLabel" Text="Please load the game first."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button x:Name="LoadGame" Text="Load Game"
+                    Clicked="LoadGame_Clicked"/>
+            <Button x:Name="SaveGame" Text="New Game"
+                    Clicked="SaveGame_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
