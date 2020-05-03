@@ -6,6 +6,7 @@ using SQLite;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BornToRace.ViewModels
 {
@@ -17,8 +18,9 @@ namespace BornToRace.ViewModels
         public LoadGame()
         {
             _connection = DependencyService.Get<ISQLiteDb>().GetConnection();
-            try { 
-            LoadFromDb(_connection);
+            try 
+            {
+               var loadFromDb = LoadFromDb(_connection);
             }
             catch
             {
@@ -26,55 +28,81 @@ namespace BornToRace.ViewModels
             }
         }
 
-        async static void LoadFromDb(SQLiteAsyncConnection connection)
+        public async Task<string> LoadFromDb(SQLiteAsyncConnection connection)
         {
             try 
             { 
-            var player = await connection.Table<PlayerDb>().ToListAsync();
-            _player = new ObservableCollection<PlayerDb>(player);
+                var player = await connection.Table<PlayerDb>().ToListAsync();
+                _player = new ObservableCollection<PlayerDb>(player);
+                return "success";
             }
             catch
             {
-                Console.WriteLine("Database is corrupt.");
+                return "Database is corrupt.";
             }
         }
-        public int GetId()
+
+        public async Task<int> GetId()
         {
+
             int _id;
             if (_player != null && _player.Count() > 0)
                    _id = _player[0].Id;
             else
-                   _id = -1;
+            { 
+                var loadFromDb = LoadFromDb(_connection);
+                await loadFromDb;
+                _id = -1;
+                if (_player != null && _player.Count() > 0)
+                    _id = _player[0].Id;
+            }
 
             return _id;
         }
-        public string GetName()
+        public async Task<string> GetName()
         {
             string _name;
             if (_player != null && _player.Count() > 0)
                 _name = _player[0].Name;
             else
+            {
+                var loadFromDb = LoadFromDb(_connection);
+                await loadFromDb;
                 _name = "NA";
-
+                if (_player != null && _player.Count() > 0)
+                    _name = _player[0].Name;
+            }
             return _name;
         }
-        public double GetMoney()
+        public async Task<double> GetMoney()
         {
             double _money;
             if (_player != null && _player.Count() > 0)
                 _money = _player[0].Money;
             else
+            {
+                var loadFromDb = LoadFromDb(_connection);
+                await loadFromDb;
                 _money = 0;
+                if (_player != null && _player.Count() > 0)
+                    _money = _player[0].Money;
+            }
 
-            return _money;
+                return _money;
         }
-        public int GetEnergy()
+        public async Task<int> GetEnergy()
         {
             int _energy;
             if (_player != null && _player.Count() > 0)
                 _energy = _player[0].Energy;
             else
+            {
+                var loadFromDb = LoadFromDb(_connection);
+                await loadFromDb;
                 _energy = 0;
+                if (_player != null && _player.Count() > 0)
+                    _energy = _player[0].Energy;
+            }
             return _energy;
         }
 

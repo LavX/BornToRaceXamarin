@@ -26,6 +26,22 @@ namespace BornToRace
         {
             //ShowSplashScreen();
             InitializeComponent();
+            Subscribe();
+        }
+
+        protected void Subscribe()
+        {
+            MessagingCenter.Subscribe<App, string>((App)Application.Current, Events.PlayerNameChanged, (Sender, name) => {
+                PlayerName.Text = name;
+            });
+
+            MessagingCenter.Subscribe<App, double>((App)Application.Current, Events.PlayerMoneyChanged, (Sender, money) => {
+                ToolbarMoney.Text = money.ToString();
+            });
+
+            MessagingCenter.Subscribe<App, int>((App)Application.Current, Events.PlayerEnergyChanged, (Sender, energy) => {
+                ToolbarEnergy.Text = energy.ToString();
+            });
         }
 
         protected override void OnAppearing()
@@ -58,6 +74,7 @@ namespace BornToRace
 
         private void MenuList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+
             MenuListItem menuListItem = e.SelectedItem as MenuListItem;
             if (menuListItem != null)
             {
@@ -65,6 +82,12 @@ namespace BornToRace
                 MenuList.SelectedItem = null;
                 IsPresented = false;
             }
+        }
+
+        private void DEBUGButtonPurge_Clicked(object sender, EventArgs e)
+        {
+            LoadGame _loadGame = new LoadGame();
+            _loadGame.DebugPurgeDatabase();
         }
     }
 }

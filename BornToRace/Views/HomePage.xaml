@@ -7,12 +7,10 @@
              x:Class="BornToRace.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="PlayerNameLabel" Text="Please load the game first."
+            <Label x:Name="WelcomeMessage" Text="Welcome to the Born To Race!&#x0a;Let's start a new career."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="LoadGame" Text="Load Game"
-                    Clicked="LoadGame_Clicked"/>
-            <Button x:Name="SaveGame" Text="New Game"
+            <Button x:Name="SaveGame" Text="New Career"
                     Clicked="SaveGame_Clicked"/>
         </StackLayout>
     </ContentPage.Content>

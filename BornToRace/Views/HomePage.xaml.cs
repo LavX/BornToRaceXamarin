@@ -2,8 +2,10 @@
 using BornToRace.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -15,27 +17,55 @@ namespace BornToRace
     public partial class HomePage : ContentPage
     {
         PlayerDb Player = new PlayerDb();
-
         public HomePage()
         {
             InitializeComponent();
         }
 
-        private void LoadGame_Clicked(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            LoadGame _loadGame = new LoadGame();
-            Player.Name = _loadGame.GetName();
-            Player.Money = _loadGame.GetMoney();
-            Player.Energy = _loadGame.GetEnergy();
-
-            if (Player.Id == -1)
-                DisplayAlert("Cannot Load", "Unable to load save game! Try to create new game instead", "Ok");
-
-            // DEBUG ONLY! IT WILL PURGE THE PLAYER TABLE!!
-            //_loadGame.DebugPurgeDatabase();
+            base.OnAppearing();
+            LoadGame();
         }
 
-        private void SaveGame_Clicked(object sender, EventArgs e)
+        protected async Task LoadGame()
+        {
+            LoadGame _loadGame = new LoadGame();
+            Player.Name = await _loadGame.GetName();
+            Player.Money = await _loadGame.GetMoney();
+            Player.Energy = await _loadGame.GetEnergy();
+
+            MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.Name);
+            MessagingCenter.Send<BornToRace.App, double>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerMoneyChanged, Player.Money);
+            MessagingCenter.Send<BornToRace.App, int>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerEnergyChanged, Player.Energy);
+            if (Player.Name != "NA")
+            {
+                WelcomeMessage.IsVisible = false;
+                SaveGame.IsVisible = false;
+            }
+        }
+        /* private async void LoadGame_Clicked(object sender, EventArgs e)
+         {
+             LoadGame _loadGame = new LoadGame();
+             Player.Name = await _loadGame.GetName();
+             Player.Money = await _loadGame.GetMoney();
+             Player.Energy = await _loadGame.GetEnergy();
+
+             MessagingCenter.Send(this, Events.PlayerNameChanged, Player.Name);
+             MessagingCenter.Send(this, Events.PlayerMoneyChanged, Player.Money);
+             MessagingCenter.Send(this, Events.PlayerEnergyChanged, Player.Energy);
+
+             MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.Name);
+             MessagingCenter.Send<BornToRace.App, double>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerMoneyChanged, Player.Money);
+             MessagingCenter.Send<BornToRace.App, int>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerEnergyChanged, Player.Energy);
+             
+
+        // DEBUG ONLY! IT WILL PURGE THE PLAYER TABLE!!
+        //_loadGame.DebugPurgeDatabase();
+
+    }*/
+
+    private void SaveGame_Clicked(object sender, EventArgs e)
         {
             WriteToDb _saveGame = new WriteToDb();
                 //_saveGame.CreateTables();

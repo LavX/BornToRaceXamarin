@@ -13,7 +13,8 @@
             <Label x:Name="ToolbarDate"
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand"
-                   FontSize="20"/>
+                   FontSize="20"
+                   />
             <StackLayout HorizontalOptions="EndAndExpand">
                 <Label x:Name="ToolbarMoney"
                        VerticalOptions="CenterAndExpand"
@@ -28,8 +29,30 @@
     
     <MasterDetailPage.Master>
         <ContentPage Padding="20" Title="Menu">
-            <StackLayout>
-                
+            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             MinimumHeightRequest="150" 
+                             MinimumWidthRequest="150"
+                             Padding="0, 0, 0, 10">
+                    <Frame CornerRadius="100" 
+                                   HeightRequest="150"
+                                   WidthRequest="150"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Padding="0, 0, 0, 0"
+                                   IsClippedToBounds="True"
+                                   >
+                        <Image x:Name="PlayerAvatar"
+                                       HorizontalOptions="Fill"
+                                       VerticalOptions="Fill" 
+                                       Aspect="AspectFill"
+                               Source="https://loremflickr.com/600/600/formulaone"
+                               />
+                    </Frame>
+                    <Label x:Name="PlayerName" 
+                           Text="Please start a new game!"
+                           HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
                 <ListView x:Name="MenuList" 
                   HasUnevenRows="True"
                   ItemSelected="MenuList_ItemSelected">
@@ -44,6 +67,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Button Text="DEBUG: Purge DB" Clicked="DEBUGButtonPurge_Clicked" />
                 <Label Text="Born To Race" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="Title" />
                 <Label x:Name="AppVersion" HorizontalOptions="Center" FontSize="Small"/>
             </StackLayout>
