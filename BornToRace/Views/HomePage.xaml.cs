@@ -27,22 +27,19 @@ namespace BornToRace
             Player.Name = _loadGame.GetName();
             Player.Money = _loadGame.GetMoney();
             Player.Energy = _loadGame.GetEnergy();
+
+            if (Player.Id == -1)
+                DisplayAlert("Cannot Load", "Unable to load save game! Try to create new game instead", "Ok");
+
+            // DEBUG ONLY! IT WILL PURGE THE PLAYER TABLE!!
+            //_loadGame.DebugPurgeDatabase();
         }
 
         private void SaveGame_Clicked(object sender, EventArgs e)
         {
-            //LoadGame _loadGame = new LoadGame();
             WriteToDb _saveGame = new WriteToDb();
-
-            //Player.Id = _loadGame.GetId();
-
-            /*if (Player.Id != 0)
-            {
+                //_saveGame.CreateTables();
                 _saveGame.NewGame("Laszlo Toth");
-            }
-            */
-
-            _saveGame.NewGame("Laszlo Toth");
 
         }
     }
