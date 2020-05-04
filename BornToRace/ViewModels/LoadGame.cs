@@ -12,7 +12,7 @@ namespace BornToRace.ViewModels
 {
     public class LoadGame
     {
-        private static ObservableCollection<PlayerDb> _player;
+        private static ObservableCollection<DriverDb> _player;
         private SQLiteAsyncConnection _connection;
 
         public LoadGame()
@@ -32,8 +32,8 @@ namespace BornToRace.ViewModels
         {
             try 
             { 
-                var player = await connection.Table<PlayerDb>().ToListAsync();
-                _player = new ObservableCollection<PlayerDb>(player);
+                var player = await connection.Table<DriverDb>().ToListAsync();
+                _player = new ObservableCollection<DriverDb>(player);
                 return "success";
             }
             catch
@@ -63,14 +63,14 @@ namespace BornToRace.ViewModels
         {
             string _name;
             if (_player != null && _player.Count() > 0)
-                _name = _player[0].Name;
+                _name = _player[0].LastName;
             else
             {
                 var loadFromDb = LoadFromDb(_connection);
                 await loadFromDb;
                 _name = "NA";
                 if (_player != null && _player.Count() > 0)
-                    _name = _player[0].Name;
+                    _name = _player[0].LastName;
             }
             return _name;
         }
@@ -109,7 +109,7 @@ namespace BornToRace.ViewModels
         // DEBUG ONLY! IT WILL PURGE THE PLAYER TABLE!!
         async public void DebugPurgeDatabase()
         {
-            await _connection.DropTableAsync<PlayerDb>();
+            await _connection.DropTableAsync<DriverDb>();
         }
     }
 }

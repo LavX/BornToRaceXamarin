@@ -1,5 +1,6 @@
 ﻿using BornToRace.Models;
 using BornToRace.ViewModels;
+using BornToRace.Views;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ namespace BornToRace
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        PlayerDb Player = new PlayerDb();
+        DriverDb Player = new DriverDb();
         public HomePage()
         {
             InitializeComponent();
@@ -42,31 +43,31 @@ namespace BornToRace
         protected async Task LoadGame()
         {
             LoadGame _loadGame = new LoadGame();
-            Player.Name = await _loadGame.GetName();
+            Player.LastName = await _loadGame.GetName();
             Player.Money = await _loadGame.GetMoney();
             Player.Energy = await _loadGame.GetEnergy();
 
-            MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.Name);
+            MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.LastName);
             MessagingCenter.Send<BornToRace.App, double>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerMoneyChanged, Player.Money);
             MessagingCenter.Send<BornToRace.App, int>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerEnergyChanged, Player.Energy);
-            if (Player.Name != "NA")
+            if (Player.LastName != "NA")
             {
                 WelcomeMessage.IsVisible = false;
-                SaveGame.IsVisible = false;
+                NewGame.IsVisible = false;
             }
         }
         /* private async void LoadGame_Clicked(object sender, EventArgs e)
          {
              LoadGame _loadGame = new LoadGame();
-             Player.Name = await _loadGame.GetName();
+             Player.LastName = await _loadGame.GetName();
              Player.Money = await _loadGame.GetMoney();
              Player.Energy = await _loadGame.GetEnergy();
 
-             MessagingCenter.Send(this, Events.PlayerNameChanged, Player.Name);
+             MessagingCenter.Send(this, Events.PlayerNameChanged, Player.LastName);
              MessagingCenter.Send(this, Events.PlayerMoneyChanged, Player.Money);
              MessagingCenter.Send(this, Events.PlayerEnergyChanged, Player.Energy);
 
-             MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.Name);
+             MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.LastName);
              MessagingCenter.Send<BornToRace.App, double>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerMoneyChanged, Player.Money);
              MessagingCenter.Send<BornToRace.App, int>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerEnergyChanged, Player.Energy);
              
@@ -76,13 +77,18 @@ namespace BornToRace
 
     }*/
 
-    private void SaveGame_Clicked(object sender, EventArgs e)
+    async private void NewGame_Clicked(object sender, EventArgs e)
         {
-            WriteToDb _saveGame = new WriteToDb();
-                //_saveGame.CreateTables();
-            _saveGame.NewGame("Laszlo Toth");
-            LoadGame();
+            /*WriteToDb _saveGame = new WriteToDb();
+            //_saveGame.CreateTables();
+            //_saveGame.NewGame("Laszlo Toth");
 
+            MessagingCenter.Send<BornToRace.App, string>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerNameChanged, Player.LastName);
+            MessagingCenter.Send<BornToRace.App, double>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerMoneyChanged, Player.Money);
+            MessagingCenter.Send<BornToRace.App, int>((BornToRace.App)Xamarin.Forms.Application.Current, Events.PlayerEnergyChanged, Player.Energy);
+            */
+            await Navigation.PushAsync(new NewGame());
         }
+
     }
 }

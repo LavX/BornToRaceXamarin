@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="clr-namespace:BornToRace.Extensions"
+             x:Class="BornToRace.Views.NewGame">
+    <ContentPage.Content>
+        <StackLayout>
+            <TableView Intent="Form" HasUnevenRows="True">
+                <TableRoot >
+                    <TableSection Title="Player: Basics">
+                        <local:AvatarCell Source="https://loremflickr.com/600/600/formulaone" />
+                        <EntryCell Label="First Name" Keyboard="Default"/>
+                        <EntryCell Label="Last Name" Keyboard="Default"/>
+                        <local:DateCell Label="Date of birth"/>
+                    </TableSection>
+                    <TableSection Title="Player: Stats">
+                        <TextCell Text="Points available: 20" />
+                        <local:SliderCell Label="Fitness" Height="40"/>
+                        <local:SliderCell Label="Focus" Height="40"/>
+                        <local:SliderCell Label="Agility" Height="40"/>
+                        <local:SliderCell Label="Courage" Height="40"/>
+                        <local:SliderCell Label="Intelligence" Height="40"/>
+                        <local:SliderCell Label="Marketbility" Height="40"/>
+                        <local:SliderCell Label="Skills" Height="40"/>
+                    </TableSection>
+                    <TableSection Title="Game: World">
+                        <SwitchCell Text="National series" On="True"/>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
+            <Button Text="Start new game" Clicked="NewGame_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

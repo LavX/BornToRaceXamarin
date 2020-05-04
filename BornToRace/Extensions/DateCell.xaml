@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BornToRace.Extensions.DateCell">
+
+        <StackLayout Orientation="Horizontal" Padding="13, 0">
+            <Label Text="{Binding Label}" VerticalOptions="Center"/>
+            <DatePicker Date="1 Jan 2020" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+
+</ViewCell>

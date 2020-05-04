@@ -27,8 +27,8 @@
             <Label x:Name="WelcomeMessage" Text="Welcome to the Born To Race!&#x0a;Let's start a new career."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Button x:Name="SaveGame" Text="New Career"
-                    Clicked="SaveGame_Clicked"/>
+            <Button x:Name="NewGame" Text="New Career"
+                    Clicked="NewGame_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="BornToRace.Extensions.SliderCell"
+       >
+
+    <StackLayout Orientation="Horizontal" Padding="13, 0">
+        <Label Text="{Binding Label}" VerticalOptions="Center" WidthRequest="100"/>
+        <Slider x:Name="Slider" Maximum="99" Minimum="1" Value="10" HeightRequest="50" WidthRequest="200" />
+        <Label Text="{Binding Source={x:Reference Slider}, Path=Value, StringFormat='{0:F0}'}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+    </StackLayout>
+
+</ViewCell>

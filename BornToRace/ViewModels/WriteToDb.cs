@@ -13,7 +13,7 @@ namespace BornToRace.ViewModels
 {
     class WriteToDb
     {
-        private static ObservableCollection<PlayerDb> _player;
+        private static ObservableCollection<DriverDb> _player;
         private static SQLiteAsyncConnection _connection;
 
         public WriteToDb()
@@ -23,26 +23,26 @@ namespace BornToRace.ViewModels
 
         public async Task<string> CreateTables()
         {
-            await _connection.CreateTableAsync<PlayerDb>();
+            await _connection.CreateTableAsync<DriverDb>();
             return "success";
         }
 
         static async Task<string> LoadFromDb(SQLiteAsyncConnection connection)
         {
-            var player = await connection.Table<PlayerDb>().ToListAsync();
-            _player = new ObservableCollection<PlayerDb>(player);
+            var player = await connection.Table<DriverDb>().ToListAsync();
+            _player = new ObservableCollection<DriverDb>(player);
             return "success";
         }
 
-        async public void NewGame(string name)
+        async public Task NewGame(DriverDb player)
         {
             var _createTables = CreateTables();
             await _createTables;
             var _loadFromDb = LoadFromDb(_connection);
             await _loadFromDb;
             if (_player.Count == 0)
-            { 
-                var player = new PlayerDb { Id = 0, Name = name, Energy = 100, Money = 5000 };
+            {
+                //var player = new DriverDb { Id = 0, LastName = name, Energy = 100, Money = 5000 };
                 await _connection.InsertAsync(player);
                 _player.Add(player);
             }
