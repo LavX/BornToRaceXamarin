@@ -6,6 +6,10 @@
              mc:Ignorable="d"
              x:Class="BornToRace.App">
     <Application.Resources>
-
+        <Style x:Key="ToolbarText" TargetType="Label">
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
     </Application.Resources>
 </Application>

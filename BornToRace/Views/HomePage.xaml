@@ -5,6 +5,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="BornToRace.HomePage">
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="End">
+            <Image Source="money.png" WidthRequest="35" HeightRequest="35"/>
+            <Label x:Name="ToolbarMoney"
+                   Style="{StaticResource ToolbarText}"
+                   />
+            <Image Source="energy.png" WidthRequest="35" HeightRequest="35"/>
+            <Label x:Name="ToolbarEnergy"
+                   Style="{StaticResource ToolbarText}"
+                   />
+            <Image Source="calendar.png" WidthRequest="35" HeightRequest="35"/>
+            <Label x:Name="ToolbarDate"
+                   Text="23/12/2012"
+                   Style="{StaticResource ToolbarText}"
+                   />
+        </StackLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="WelcomeMessage" Text="Welcome to the Born To Race!&#x0a;Let's start a new career."

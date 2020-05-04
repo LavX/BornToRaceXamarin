@@ -34,14 +34,6 @@ namespace BornToRace
             MessagingCenter.Subscribe<App, string>((App)Application.Current, Events.PlayerNameChanged, (Sender, name) => {
                 PlayerName.Text = name;
             });
-
-            MessagingCenter.Subscribe<App, double>((App)Application.Current, Events.PlayerMoneyChanged, (Sender, money) => {
-                ToolbarMoney.Text = money.ToString();
-            });
-
-            MessagingCenter.Subscribe<App, int>((App)Application.Current, Events.PlayerEnergyChanged, (Sender, energy) => {
-                ToolbarEnergy.Text = energy.ToString();
-            });
         }
 
         protected override void OnAppearing()

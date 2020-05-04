@@ -8,24 +8,7 @@
                  x:Class="BornToRace.MainPage"
              >
 
-    <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            <Label x:Name="ToolbarDate"
-                   HorizontalOptions="Center"
-                   VerticalOptions="CenterAndExpand"
-                   FontSize="20"
-                   />
-            <StackLayout HorizontalOptions="EndAndExpand">
-                <Label x:Name="ToolbarMoney"
-                       VerticalOptions="CenterAndExpand"
-                       FontSize="20"/>
-                <Label x:Name="ToolbarEnergy"
-                       VerticalOptions="CenterAndExpand"
-                       FontSize="20"
-                        />
-            </StackLayout>
-        </StackLayout>
-    </NavigationPage.TitleView>
+
     
     <MasterDetailPage.Master>
         <ContentPage Padding="20" Title="Menu">
@@ -74,7 +57,7 @@
         </ContentPage>
     </MasterDetailPage.Master>
     <MasterDetailPage.Detail>
-        <NavigationPage >
+        <NavigationPage>
             <x:Arguments>
                 <local:HomePage />
             </x:Arguments>

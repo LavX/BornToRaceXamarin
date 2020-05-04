@@ -25,9 +25,20 @@ namespace BornToRace
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Subscribe();
             LoadGame();
         }
 
+        protected void Subscribe()
+        {
+            MessagingCenter.Subscribe<App, double>((App)Application.Current, Events.PlayerMoneyChanged, (Sender, money) => {
+                ToolbarMoney.Text = "Money:\r\n$" + money.ToString("#,##0");
+            });
+
+            MessagingCenter.Subscribe<App, int>((App)Application.Current, Events.PlayerEnergyChanged, (Sender, energy) => {
+                ToolbarEnergy.Text = "Energy:\r\n" + energy.ToString()+"/100";
+            });
+        }
         protected async Task LoadGame()
         {
             LoadGame _loadGame = new LoadGame();
@@ -69,7 +80,8 @@ namespace BornToRace
         {
             WriteToDb _saveGame = new WriteToDb();
                 //_saveGame.CreateTables();
-                _saveGame.NewGame("Laszlo Toth");
+            _saveGame.NewGame("Laszlo Toth");
+            LoadGame();
 
         }
     }
