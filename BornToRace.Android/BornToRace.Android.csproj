@@ -40,6 +40,8 @@
     <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Users\lavx\AppData\Local\Xamarin\Mono for Android\Keystore\DevKey\DevKey.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass />
+    <MandroidI18n />
+    <AndroidUseAapt2>false</AndroidUseAapt2>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
